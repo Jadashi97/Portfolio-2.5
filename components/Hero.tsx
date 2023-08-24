@@ -1,68 +1,62 @@
-"use client";
-import { SocialIcon } from "react-social-icons";
-import { motion } from "framer-motion";
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { Social } from "../typings";
+import React from "react";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { urlForImage } from "@/sanity/lib/image";
+import { PageInfo } from "../typings";
+import BackgroundCircles from "./BackgroundCircles";
 
 type Props = {
-    socials: Social[];
+    pageInfo: PageInfo;
 };
 
-const Header = ({ socials }: Props) => {
+function Hero({ pageInfo }: Props) {
+    const [text, count] = useTypewriter({
+        words: [
+            `Hi, The name's ${pageInfo?.name}`,
+            "Guy-who-loves-Coffee.tsx",
+            "<ButLovesToCodeMore />",
+        ],
+        loop: true,
+        delaySpeed: 2000,
+    });
     return (
-        <div className="sticky top-0 flex items-start xl:items-center justify-between p-5 z-20 max-w-7xl mx-auto">
-            <motion.div
-                initial={{
-                    x: -500,
-                    opacity: 0,
-                    scale: 0.5,
-                }}
-                animate={{
-                    x: 0,
-                    opacity: 1,
-                    scale: 1,
-                }}
-                transition={{ duration: 1.5 }}
-                className="flex flex-row items-center"
-            >
-                {socials.map((social) => (
-                    <SocialIcon
-                        key={social._id}
-                        url={social.url}
-                        fgColor="gray"
-                        bgColor="transparent"
-                    />
-                ))}
-            </motion.div>
+        <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
+            <BackgroundCircles />
+            <img
+                className="relative rounded-full h-32 w-32 mx-auto object-cover"
+                src={urlForImage(pageInfo?.heroImage).url()}
+                alt=""
+            />
+            <div className="z-20 relative">
+                <h2 className="tracking-[15px] text-sm uppercase text-gray-500 pb-2">
+                    {pageInfo?.role}
+                </h2>
+                <h1 className="text-5xl lg:text-6xl font-semibold px-10">
+                    <span className="mr-3">{text}</span>
+                    <Cursor cursorColor="#F7AB0A" />
+                </h1>
 
-            <Link href={'#contact'}>
-                <motion.div
-                    initial={{
-                        x: 500,
-                        opacity: 0,
-                        scale: 0.5,
-                    }}
-                    animate={{
-                        x: 0,
-                        opacity: 1,
-                        scale: 1,
-                    }}
-                    transition={{ duration: 1 }}
-                    className="flex flex-row items-center text-gray-300 cursor-pointer"
-                >
-                    <SocialIcon
-                        className="cursor-pointer"
-                        network="email"
-                        fgColor="gray"
-                        bgColor="transparent"
-                    />
-                    <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
-                        Get In Touch
-                    </p>
-                </motion.div>
-            </Link>
-        </div >
+                <div className="pt-5">
+                    <Link href="#about">
+                        <button className="heroButton">About</button>
+                    </Link>
+
+                    <Link href="#experience">
+                        <button className="heroButton">Experience</button>
+                    </Link>
+
+                    <Link href="#skills">
+                        <button className="heroButton">Skills</button>
+                    </Link>
+
+                    <Link href="#projects">
+                        <button className="heroButton">Projects</button>
+                    </Link>
+                </div>
+            </div>
+        </div>
     );
-};
+}
 
-export default Header;
+export default Hero;
