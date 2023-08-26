@@ -1,9 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
+import dynamic from "next/dynamic";
 import { GetStaticProps } from "next";
 import About from "../components/About";
 import ContactMe from "../components/ContactMe";
-import Header from "../components/Header";
-import Hero from "../components/Hero";
+// import Header from "../components/Header";
+
+const HeaderH = dynamic(() => import('../components/Header'));
+const Hero = dynamic(() => import("../components/Hero"));
+// import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import Skills from "../components/Skills";
 import WorkExperience from "../components/WorkExperience";
@@ -14,6 +18,7 @@ import { fetchSkills } from "../utils/fetchSkills";
 import { fetchProjects } from "../utils/fetchProjects";
 import { fetchSocial } from "../utils/fetchSocials";
 import Link from "next/link";
+
 
 type Props = {
   pageInfo: PageInfo;
@@ -26,39 +31,40 @@ type Props = {
 const Home = ({ projects, skills, pageInfo, experiences, socials }: Props) => {
   return (
     <div className="snap-y snap-mandatory h-screen overflow-y-scroll scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80 bg-[rgb(36,36,36)] text-white z-0">
-      <Header socials={socials} />
+      {/* <Header socials={socials} /> */}
+      <HeaderH socials={socials} />
 
       {/* Hero Banner Section */}
       <section id="hero" className="snap-start">
         <Hero pageInfo={pageInfo} />
       </section>
 
-      {/* About Section */}
+      {/* About Section
       <section id="about" className="snap-center">
         <About pageInfo={pageInfo} />
-      </section>
+      </section> */}
 
       {/* Experience Section */}
-      <section id="experience" className="snap-center">
+      {/* <section id="experience" className="snap-center">
         <WorkExperience experiences={experiences} />
-      </section>
+      </section> */}
 
       {/* Skills Section */}
-      <section id="skills" className="snap-start">
+      {/* <section id="skills" className="snap-start">
         <Skills skills={skills} />
-      </section>
+      </section> */}
 
       {/* Projects Section */}
-      <section id="projects" className="snap-start">
+      {/* <section id="projects" className="snap-start">
         <Projects projects={projects} />
-      </section>
+      </section> */}
 
       {/* Contact Me Section */}
-      <section id="contact" className="snap-start">
+      {/* <section id="contact" className="snap-start">
         <ContactMe pageInfo={pageInfo} />
-      </section>
+      </section> */}
 
-      <Link href="#hero">
+      {/* <Link href="#hero">
         <footer className="sticky bottom-5 w-full cursor-pointer">
           <div className="flex items-center justify-center">
             <img
@@ -68,7 +74,7 @@ const Home = ({ projects, skills, pageInfo, experiences, socials }: Props) => {
             />
           </div>
         </footer>
-      </Link>
+      </Link> */}
     </div>
   );
 };

@@ -1,12 +1,16 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
 // import React from "react";
 "use client";
 import { motion } from "framer-motion";
 import { PageInfo } from "../typings";
 import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
+
 type Props = {
     pageInfo: PageInfo;
 };
+
 
 function About({ pageInfo }: Props) {
     return (
@@ -14,7 +18,7 @@ function About({ pageInfo }: Props) {
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                //   viewport={{ once: true }}
+                viewport={{ once: true }}
                 transition={{ duration: 1.5 }}
                 className="flex relative flex-col text-center md:text-left md:flex-row max-w-7xl px-10 h-screen justify-evenly mx-auto items-center"
             >
@@ -31,8 +35,7 @@ function About({ pageInfo }: Props) {
                     viewport={{ once: true }}
                     src={urlForImage(pageInfo?.profilePic).url()}
                     className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full md:rounded-lg md:w-64 md:h-96 xl:w-[500px] xl:h-[600px] object-cover"
-                ></motion.img>
-
+                />
                 <div className="space-y-10 px-0 md:px-10">
                     <h4 className="text-4xl font-semibold">
                         Here is a{" "}
